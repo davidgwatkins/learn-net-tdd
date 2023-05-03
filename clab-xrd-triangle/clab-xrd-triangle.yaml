@@ -1,0 +1,25 @@
+name: tri-xrd
+
+topology:
+  kinds:
+    cisco_xrd:
+      env:
+        CLAB_MGMT_VRF: management
+  nodes:
+    xr1:
+      kind: cisco_xrd
+      image: ios-xr/xrd-control-plane:7.9.1
+      startup-config: startup-config/xr1.cfg
+    xr2:
+      kind: cisco_xrd
+      image: ios-xr/xrd-control-plane:7.9.1
+      startup-config: startup-config/xr2.cfg
+    xr3:
+      kind: cisco_xrd
+      image: ios-xr/xrd-control-plane:7.9.1
+      startup-config: startup-config/xr3.cfg
+
+  links:
+    - endpoints: ["xrd01:Gi0-0-0-0", "xrd02:Gi0-0-0-0"]
+    - endpoints: ["xrd01:Gi0-0-0-1", "xrd03:Gi0-0-0-0"]
+    - endpoints: ["xrd02:Gi0-0-0-1", "xrd03:Gi0-0-0-1"]
